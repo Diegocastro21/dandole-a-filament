@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Support\Facades\Auth;
-// use Filament\Notifications\Notification;
+use Filament\Notifications\Notification;
 // use Barryvdh\DomPDF\Facade\Pdf;
 // use EightyNine\ExcelImport\ExcelImportAction;
 // use App\Imports\MyTimesheetImport;
@@ -59,12 +59,12 @@ class ListTimesheets extends ListRecords
                     $timesheet->type = 'work';
                     $timesheet->save();
 
-                    // Notification::make()
-                    //     ->title('Has entrado a trabajar')
-                    //     ->body('Has comenzado a trabajar a las:'.Carbon::now())
-                    //     ->color('success')
-                    //     ->success()
-                    //     ->send();
+                    Notification::make()
+                        ->title('Has entrado a trabajar')
+                        ->body('Has comenzado a trabajar a las:'.Carbon::now())
+                        ->color('success')
+                        ->success()
+                        ->send();
                 }),
             Action::make('stopWork')
                 ->label('Parar de trabajar')
@@ -76,11 +76,11 @@ class ListTimesheets extends ListRecords
                 ->action(function () use ($lastTimesheet){
                     $lastTimesheet->day_out = Carbon::now();
                     $lastTimesheet->save();
-                    // Notification::make()
-                    //     ->title('Has parado de trabajar')
-                    //     ->success()
-                    //     ->color('success')
-                    //     ->send();
+                    Notification::make()
+                        ->title('Has parado de trabajar')
+                        ->success()
+                        ->color('success')
+                        ->send();
                 }),
             Action::make('inPause')
                 ->label('Comenzar Pausa')
@@ -98,11 +98,11 @@ class ListTimesheets extends ListRecords
                     $timesheet->type = 'pause';
                     $timesheet->save();
 
-                    // Notification::make()
-                    //     ->title('Comienzas tu pausa')
-                    //     ->color('info')
-                    //     ->info()
-                    //     ->send();
+                    Notification::make()
+                        ->title('Comienzas tu pausa')
+                        ->color('info')
+                        ->info()
+                        ->send();
                 }),
             Action::make('stopPause')
                 ->label('Parar Pausa')
@@ -119,11 +119,11 @@ class ListTimesheets extends ListRecords
                     $timesheet->day_in = Carbon::now();
                     $timesheet->type = 'work';
                     $timesheet->save();
-                    // Notification::make()
-                    //     ->title('Comienzas de nuevo a trabajar')
-                    //     ->color('info')
-                    //     ->info()
-                    //     ->send();
+                    Notification::make()
+                        ->title('Comienzas de nuevo a trabajar')
+                        ->color('info')
+                        ->info()
+                        ->send();
                 }),
             Actions\CreateAction::make(),
             // ExcelImportAction::make()->color("primary")->use(MyTimesheetImport::class),
