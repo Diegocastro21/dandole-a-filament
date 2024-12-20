@@ -11,7 +11,7 @@ use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Support\Facades\Auth;
 use Filament\Notifications\Notification;
-// use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 use EightyNine\ExcelImport\ExcelImportAction;
 use App\Imports\MyTimesheetImport;
 
@@ -131,10 +131,10 @@ class ListTimesheets extends ListRecords
             ->label('Crear PDF')
             ->color('warning')
             ->requiresConfirmation()
-            // ->url(
-                // fn (): string => route('pdf.example', ['user' => Auth::user()]),
-            //     shouldOpenInNewTab: true
-            // ),
+            ->url(
+                fn (): string => route('pdf.example', ['user' => Auth::user()]),
+                shouldOpenInNewTab: true
+            ),
         ];
     }
 }
