@@ -18,7 +18,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-// use Shanerbaner82\PanelRoles\PanelRoles;
+use Shanerbaner82\PanelRoles\PanelRoles;
 
 class DashboardPanelProvider extends PanelProvider
 {
@@ -58,19 +58,19 @@ class DashboardPanelProvider extends PanelProvider
             ])
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-                // PanelRoles::make()
-                // ->roleToAssign('super-admin')
-                // ->restrictedRoles(['super_admin']),
+                PanelRoles::make()
+                ->roleToAssign('super-admin')
+                ->restrictedRoles(['Super Administrador']),
+            ])
+            ->userMenuItems([
+                MenuItem::make()
+                    ->label('Personal')
+                    ->url('/personal')
+                    ->icon('heroicon-o-cog-6-tooth')
+                    ->visible(fn (): bool => auth()->user()?->hasAnyRole([
+                        'Super Administrador',
+                    ])),
+                // ...
             ]);
-            // ->userMenuItems([
-            //     MenuItem::make()
-            //         ->label('Personal')
-            //         ->url('/personal')
-            //         ->icon('heroicon-o-cog-6-tooth')
-            //         ->visible(fn (): bool => auth()->user()?->hasAnyRole([
-            //             'super_admin',
-            //         ])),
-            //     // ...
-            // ]);
     }
 }

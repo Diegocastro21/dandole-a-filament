@@ -70,34 +70,33 @@ class PersonalPanelProvider extends PanelProvider
                 // SpotlightPlugin::make(),
                 // EnvironmentIndicatorPlugin::make(),
             ])
-            // ->navigationItems([
-            //     NavigationItem::make('Subscríbete')
-            //     ->url('https://www.youtube.com/@elrincondeisma?sub_confirmation=1', shouldOpenInNewTab: true)
-            //     ->icon('heroicon-o-heart')
-            //     ->sort(3),
+            ->navigationItems([
+                NavigationItem::make('Subscríbete')
+                ->url('https://github.com/Diegocastro21', shouldOpenInNewTab: true)
+                ->icon('heroicon-o-heart')
+                ->sort(3),
 
-            // ])
-            ;
-            // ->userMenuItems([
-            //     MenuItem::make()
-            //         ->label('Admin')
-            //         ->url('/admin')
-            //         ->icon('heroicon-o-cog-6-tooth')
-            //         ->visible(function (){
-            //             if(auth()->user()){
-            //                 if(auth()->user()?->hasAnyRole([
-            //                     'super_admin'
-            //                 ])){
-            //                     return true;
-            //                 }else{
-            //                     return false;
-            //                 }
-            //             }else{
-            //                 return false;
-            //             }
-            //             ;
-            //         }) ,
-            //     // ...
-            // ]);
+            ])
+            ->userMenuItems([
+                MenuItem::make()
+                    ->label('Admin')
+                    ->url('/admin')
+                    ->icon('heroicon-o-cog-6-tooth')
+                    ->visible(function (){
+                        if(auth()->user()){
+                            if(auth()->user()?->hasAnyRole([
+                                'Super Administrador'
+                            ])){
+                                return true;
+                            }else{
+                                return false;
+                            }
+                        }else{
+                            return false;
+                        }
+                        ;
+                    }) ,
+                // ...
+            ]);
     }
 }
