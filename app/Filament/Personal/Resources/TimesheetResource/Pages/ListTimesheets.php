@@ -12,8 +12,8 @@ use Filament\Resources\Pages\ListRecords;
 use Illuminate\Support\Facades\Auth;
 use Filament\Notifications\Notification;
 // use Barryvdh\DomPDF\Facade\Pdf;
-// use EightyNine\ExcelImport\ExcelImportAction;
-// use App\Imports\MyTimesheetImport;
+use EightyNine\ExcelImport\ExcelImportAction;
+use App\Imports\MyTimesheetImport;
 
 class ListTimesheets extends ListRecords
 {
@@ -126,7 +126,7 @@ class ListTimesheets extends ListRecords
                         ->send();
                 }),
             Actions\CreateAction::make(),
-            // ExcelImportAction::make()->color("primary")->use(MyTimesheetImport::class),
+            ExcelImportAction::make()->color("primary")->use(MyTimesheetImport::class),
             Action::make('createPDF')
             ->label('Crear PDF')
             ->color('warning')

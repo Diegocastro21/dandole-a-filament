@@ -14,6 +14,9 @@ use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class TimesheetResource extends Resource
 {
@@ -108,18 +111,18 @@ class TimesheetResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-                // ExportBulkAction::make()->exports([
-                //     ExcelExport::make('table')->fromTable()
-                //     ->withFilename('Timesheet_'.date('Y-m-d') . '_export')
-                //     ->withColumns([
-                //         Column::make('User'),
-                //         Column::make('created_at'),
-                //         Column::make('deleted_at'),
-                //     ]),
-                //     ExcelExport::make('form')->fromForm()
-                //     ->askForFilename()
-                //     ->askForWriterType(),
-                // ])
+                ExportBulkAction::make()->exports([
+                    ExcelExport::make('table')->fromTable()
+                    ->withFilename('Timesheet_'.date('Y-m-d') . '_export')
+                    ->withColumns([
+                        Column::make('User'),
+                        Column::make('created_at'),
+                        Column::make('deleted_at'),
+                    ]),
+                    ExcelExport::make('form')->fromForm()
+                    ->askForFilename()
+                    ->askForWriterType(),
+                ])
             ]);
     }
 
